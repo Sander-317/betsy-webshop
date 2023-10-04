@@ -9,7 +9,6 @@ install()
 
 def main():
     delete_database()
-    print("Database deleted")
     setup_data()
 
 
