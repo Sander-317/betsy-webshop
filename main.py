@@ -57,23 +57,33 @@ def list_user_products(user_id):
 
 
 def list_products_per_tag(tag_id):
-    list_per_tag = models.ProductTags.select().where(
-        models.ProductTags.tag_id == tag_id
+    query = (
+        models.ProductTags.select()
+        .where(models.ProductTags.tag_id == tag_id)
+        .join(models.Product)
     )
-    list_of_products_per_tag = []
-    [
-        list_of_products_per_tag.append(
-            models.Product.get(models.Product.id == i.product_id)
-        )
-        for i in list_per_tag
-    ]
-    return list_of_products_per_tag
+    list_of_product_per_tag = []
+    [list_of_product_per_tag.append(i) for i in query]
+    return list_of_product_per_tag
+
+    # list_per_tag = models.ProductTags.select().where(
+    #     models.ProductTags.tag_id == tag_id
+    # )
+    # list_of_products_per_tag = []
+    # [
+    #     list_of_products_per_tag.append(
+    #         models.Product.get(models.Product.id == i.product_id)
+    #     )
+    #     for i in list_per_tag
+    # ]
+
+    # return list_of_products_per_tag
     ...
 
 
-# list_products_per_tag(7)
-# list_products_per_tag(2)
-# list_products_per_tag(5)
+list_products_per_tag(7)
+list_products_per_tag(2)
+list_products_per_tag(5)
 
 
 def add_product_to_catalog(user_id, product):
