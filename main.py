@@ -63,7 +63,7 @@ def list_products_per_tag(tag_id):
         .join(models.Product)
     )
     list_of_product_per_tag = []
-    [list_of_product_per_tag.append(i) for i in query]
+    [list_of_product_per_tag.append(i.product) for i in query]
     return list_of_product_per_tag
 
     # list_per_tag = models.ProductTags.select().where(
@@ -81,9 +81,9 @@ def list_products_per_tag(tag_id):
     ...
 
 
-list_products_per_tag(7)
-list_products_per_tag(2)
-list_products_per_tag(5)
+# list_products_per_tag(7)
+# list_products_per_tag(2)
+# list_products_per_tag(5)
 
 
 def add_product_to_catalog(user_id, product):
