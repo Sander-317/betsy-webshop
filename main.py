@@ -32,15 +32,25 @@ def search(term):
 
 
 def list_user_products(user_id):
-    user_products = models.OwnedProducts.select().where(
-        models.OwnedProducts.user_id == user_id
+    query = (
+        models.OwnedProducts.select()
+        .where(models.OwnedProducts.user_id == 1)
+        .join(models.Product)
     )
     product_list = []
-    [
-        product_list.append(models.Product.get(models.Product.id == i))
-        for i in user_products
-    ]
+    [product_list.append(i.product) for i in query]
     return product_list
+
+    # user_products = models.OwnedProducts.select().where(
+    #     models.OwnedProducts.user_id == user_id
+    # )
+    # product_list = []
+    # [
+    #     product_list.append(models.Product.get(models.Product.id == i))
+    #     for i in user_products
+    # ]
+    # print(product_list)
+    # return product_list
     ...
 
 
