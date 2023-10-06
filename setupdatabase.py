@@ -9,7 +9,7 @@ install()
 
 def main():
     delete_database()
-    setup_data()
+    # setup_data()
 
 
 # Read csv files
@@ -60,7 +60,7 @@ def setup_data():
                 models.Tag.create(name=i)
             new_product.tag.add(models.Tag.get(models.Tag.name == i).id)
 
-        # assings owner to the product
+        # assigns owner to the product
         owner = models.User.get(models.User.id == random.randint(1, number_of_users))
         owner.owned_products.add(models.Product.get(models.Product.name == product[0]))
         owner.save()
